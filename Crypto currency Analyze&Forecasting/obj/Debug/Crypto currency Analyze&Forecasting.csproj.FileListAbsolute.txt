@@ -1,0 +1,16 @@
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto currency Analyze&Forecasting.csproj.AssemblyReference.cache
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto currency Analyze&Forecasting.csproj.SuggestedBindingRedirects.cache
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto_currency_Analyze_Forecasting.Forms.AnalyzeWindow.resources
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto_currency_Analyze_Forecasting.CryptoCurrencyWindow.resources
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto_currency_Analyze_Forecasting.MainWindow.resources
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto_currency_Analyze_Forecasting.Properties.Resources.resources
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto currency Analyze&Forecasting.csproj.GenerateResource.cache
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto currency Analyze&Forecasting.csproj.CoreCompileInputs.cache
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Crypto currency Analyze&Forecasting.exe.config
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Crypto currency Analyze&Forecasting.exe
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Crypto currency Analyze&Forecasting.pdb
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto currency Analyze&Forecasting.csproj.CopyComplete
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto currency Analyze&Forecasting.exe
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto currency Analyze&Forecasting.pdb

@@ -19,6 +19,8 @@ namespace Crypto_currency_Analyze_Forecasting
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            CryptoCurrencyWindow form2 = new CryptoCurrencyWindow();
+            form2.ShowDialog();
 
         }
     }
