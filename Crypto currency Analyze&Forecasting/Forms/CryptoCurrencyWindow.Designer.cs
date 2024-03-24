@@ -39,6 +39,8 @@
             this.intervalComboBox = new System.Windows.Forms.ComboBox();
             this.analyzeButton = new System.Windows.Forms.Button();
             this.forecastingButton = new System.Windows.Forms.Button();
+            this.minMaxChangeCurrency = new System.Windows.Forms.ListBox();
+            this.saveDataToDBButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // chooseCurrentCurrency
@@ -141,12 +143,33 @@
             this.forecastingButton.TabIndex = 10;
             this.forecastingButton.Text = "Forecasting";
             this.forecastingButton.UseVisualStyleBackColor = true;
+            this.forecastingButton.Click += new System.EventHandler(this.forecastingButton_Click);
+            // 
+            // minMaxChangeCurrency
+            // 
+            this.minMaxChangeCurrency.FormattingEnabled = true;
+            this.minMaxChangeCurrency.Location = new System.Drawing.Point(381, 13);
+            this.minMaxChangeCurrency.Name = "minMaxChangeCurrency";
+            this.minMaxChangeCurrency.Size = new System.Drawing.Size(407, 160);
+            this.minMaxChangeCurrency.TabIndex = 11;
+            // 
+            // saveDataToDBButton
+            // 
+            this.saveDataToDBButton.Location = new System.Drawing.Point(631, 219);
+            this.saveDataToDBButton.Name = "saveDataToDBButton";
+            this.saveDataToDBButton.Size = new System.Drawing.Size(112, 68);
+            this.saveDataToDBButton.TabIndex = 12;
+            this.saveDataToDBButton.Text = "Save data to Database";
+            this.saveDataToDBButton.UseVisualStyleBackColor = true;
+            this.saveDataToDBButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // CryptoCurrencyWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.saveDataToDBButton);
+            this.Controls.Add(this.minMaxChangeCurrency);
             this.Controls.Add(this.forecastingButton);
             this.Controls.Add(this.intervalComboBox);
             this.Controls.Add(this.intervalLabel);
@@ -179,5 +202,7 @@
         private System.Windows.Forms.ComboBox intervalComboBox;
         private System.Windows.Forms.Button analyzeButton;
         private System.Windows.Forms.Button forecastingButton;
+        private System.Windows.Forms.ListBox minMaxChangeCurrency;
+        private System.Windows.Forms.Button saveDataToDBButton;
     }
 }

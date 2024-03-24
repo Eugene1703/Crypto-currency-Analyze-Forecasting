@@ -23,3 +23,16 @@ C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency
 C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\LiveCharts.WinForms.xml
 C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\LiveCharts.Wpf.pdb
 C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\FireSharp.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\System.Net.Http.Extensions.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto currency Analyze&Forecasting.csproj.App.config
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto_currency_Analyze_Forecasting.Forms.ForecastingWindow.resources

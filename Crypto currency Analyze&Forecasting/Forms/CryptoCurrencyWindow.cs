@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Crypto_currency_Analyze_Forecasting
@@ -25,6 +26,7 @@ namespace Crypto_currency_Analyze_Forecasting
         {
             InitializeCurrencyComboBoxInfo();
             InitializeIntervalComboBoxInfo();
+            InitializeMinMaxChangeCurrency();
             currencyNameTextBox.Visible = false;
             chooseAnotherCurrencyButton.Visible = false;
             analyzeButton.Visible = false;
@@ -33,7 +35,35 @@ namespace Crypto_currency_Analyze_Forecasting
             explorerLinkLabel.Font = new Font("Arial", 16, FontStyle.Bold);
             forecastingButton.Visible = false;
         }
-         
+        private void InitializeMinMaxChangeCurrency()
+        {
+            var currencyWithMaxVolume = currentValidCurrencyData.OrderByDescending(c => c.volumeUsd24Hr).FirstOrDefault();
+            var currencyWithMinVolume = currentValidCurrencyData.OrderBy(c => c.volumeUsd24Hr).FirstOrDefault();
+
+            var currencyWithMaxChange = currentValidCurrencyData.OrderByDescending(c => c.changePercent24Hr).FirstOrDefault();
+            var currencyWithMinChange = currentValidCurrencyData.OrderBy(c => c.changePercent24Hr).FirstOrDefault();
+            minMaxChangeCurrency.Font = new Font("Arial", 16, FontStyle.Bold);
+
+            string[] items = 
+                {
+                 $"The most sold currency {currencyWithMaxVolume.name} ({Math.Round(currencyWithMaxVolume.volumeUsd24Hr, 2).ToString("#,0")} $)",
+                 $"The least sold currency {currencyWithMinVolume.name} ({Math.Round(currencyWithMinVolume.volumeUsd24Hr, 2).ToString("#,0")} $)",
+                 $"The most increased currency {currencyWithMaxChange.name} ({Math.Round(currencyWithMaxChange.changePercent24Hr, 2)} %)",
+                 $"The most decreased currency {currencyWithMinChange.name} ({Math.Round(currencyWithMinChange.changePercent24Hr, 2)} %)"
+            };
+
+            int maxWidth = 0;
+            foreach (string item in items)
+            {
+                Size textSize = TextRenderer.MeasureText(item, minMaxChangeCurrency.Font);
+                maxWidth = Math.Max(maxWidth, textSize.Width);
+            }
+            minMaxChangeCurrency.Width = maxWidth + SystemInformation.VerticalScrollBarWidth;
+            foreach (string item in items)
+            {
+                minMaxChangeCurrency.Items.Add(item);
+            }
+        }
        private void InitializeIntervalComboBoxInfo()
        {
             Dictionary<string, string> periodValues = new Dictionary<string, string>
@@ -55,8 +85,10 @@ namespace Crypto_currency_Analyze_Forecasting
         private void InitializeCurrencyComboBoxInfo()
         {
             int width = 0;
+
             currentValidCurrencyData = currenciesApi.GetValidCurrencyData();
-            foreach(var currency in currentValidCurrencyData)
+            currentValidCurrencyData.Sort((a, b) => string.Compare(a.name, b.name));
+            foreach (var currency in currentValidCurrencyData)
             {
                 chooseCurrentCurrency.Items.Add(currency.name);
                 int txtLength = currency.name.ToString().Length;
@@ -108,6 +140,7 @@ namespace Crypto_currency_Analyze_Forecasting
                         intervalLabel.Visible = false;
                         chooseAnotherCurrencyButton.Visible = true;
                         forecastingButton.Visible = true;
+                        minMaxChangeCurrency.Visible = false;
                         PrintInfo(selectedCurrency);
                     }
                     else throw new Exception("There is no currency with such a name");
@@ -155,6 +188,7 @@ namespace Crypto_currency_Analyze_Forecasting
             intervalComboBox.Visible = true;
             intervalLabel.Visible = true;
             forecastingButton.Visible = false;
+            minMaxChangeCurrency.Visible = true;
         }
 
         private void explorerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -173,6 +207,25 @@ namespace Crypto_currency_Analyze_Forecasting
         {
             ComboboxItem selectedItem = (ComboboxItem)intervalComboBox.SelectedItem;
             selectedInterval = selectedItem.Value.ToString();
+        }
+
+        private void forecastingButton_Click(object sender, EventArgs e)
+        {
+            ForecastingWindow forecastingWindow = new ForecastingWindow(currencyDataList);
+            forecastingWindow.Show();
+        }
+        private string SanitizeCurrencyName(string name)
+        {
+            return Regex.Replace(name, @"[$#\[\]/\.]", "_");
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DateTime currentDate = DateTime.Now;
+            string formattedDate = currentDate.ToString("dd_MM_yyyy_HH_mm");
+            Firebase firebase = new Firebase();
+            string path = "CurrencyData" + formattedDate;
+            var dataToSave = currentValidCurrencyData.ToDictionary(currency => SanitizeCurrencyName(currency.name), currency => currency);
+            firebase.client.Set(path + "/", dataToSave);
         }
     }
 }
