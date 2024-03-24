@@ -1,13 +1,9 @@
 ﻿using Crypto_currency_Analyze_Forecasting.Classes;
+using Crypto_currency_Analyze_Forecasting.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Crypto_currency_Analyze_Forecasting
@@ -18,6 +14,7 @@ namespace Crypto_currency_Analyze_Forecasting
         private CurrenciesApi currenciesApi;
         private List<IntervalCurrencyData> currencyDataList;
         private string currencyBlockchainExplorerUrl;
+        string selectedInterval;
         public CryptoCurrencyWindow()
         {
             InitializeComponent();
@@ -26,17 +23,36 @@ namespace Crypto_currency_Analyze_Forecasting
 
         private void CryptoCurrencyWindow_Load(object sender, EventArgs e)
         {
-            InitializeComboBoxInfo();
+            InitializeCurrencyComboBoxInfo();
+            InitializeIntervalComboBoxInfo();
             currencyNameTextBox.Visible = false;
             chooseAnotherCurrencyButton.Visible = false;
+            analyzeButton.Visible = false;
             currencyNameTextBox.KeyPress += CurrencyNameTextBox_KeyPress;
             infoPrintLabel.Font = new Font("Arial", 16, FontStyle.Bold);
             explorerLinkLabel.Font = new Font("Arial", 16, FontStyle.Bold);
+            forecastingButton.Visible = false;
         }
-
-       
-
-        private void InitializeComboBoxInfo()
+         
+       private void InitializeIntervalComboBoxInfo()
+       {
+            Dictionary<string, string> periodValues = new Dictionary<string, string>
+            {
+                {"Day", "m1"},
+                {"Five Days", "m5"},
+                {"Week", "m15"},
+                {"Two Weeks", "m30"},
+                {"Month", "h1"},
+                {"Two Months", "h2"},
+                {"Six Months", "h6"},
+                {"Twelve Months", "h12"}
+            };
+            foreach (var pair in periodValues)
+            {
+                intervalComboBox.Items.Add(new ComboboxItem(pair.Key, pair.Value));
+            }
+        }
+        private void InitializeCurrencyComboBoxInfo()
         {
             int width = 0;
             currentValidCurrencyData = currenciesApi.GetValidCurrencyData();
@@ -81,14 +97,17 @@ namespace Crypto_currency_Analyze_Forecasting
                     ValidCurrencyData selectedCurrency = currentValidCurrencyData.FirstOrDefault(currency => currency.id == id);
                     if (selectedCurrency != null)
                     {
-                        currencyDataList = currenciesApi.GetIntervalCurrencyData($"{selectedCurrency.id}", "m1");
+                        currencyDataList = currenciesApi.GetIntervalCurrencyData($"{selectedCurrency.id}", selectedInterval);
                         infoPrintLabel.Visible = true;
-
+                        analyzeButton.Visible=true;
                         textBoxShow.Visible = false;
                         currencyNameTextBox.Visible = false;
                         chooseCurrentCurrency.Visible = false;
                         Title.Visible = false;
+                        intervalComboBox.Visible = false;
+                        intervalLabel.Visible = false;
                         chooseAnotherCurrencyButton.Visible = true;
+                        forecastingButton.Visible = true;
                         PrintInfo(selectedCurrency);
                     }
                     else throw new Exception("There is no currency with such a name");
@@ -102,7 +121,11 @@ namespace Crypto_currency_Analyze_Forecasting
         }
         private void chooseCurrentCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CurrencyFromSelection(GetIdFromName(chooseCurrentCurrency.SelectedItem as string));
+            if (selectedInterval != null)
+            {
+                CurrencyFromSelection(GetIdFromName(chooseCurrentCurrency.SelectedItem as string));
+            }
+            else { MessageBox.Show("Select the data validity period"); }
         }
         private void CurrencyNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -115,22 +138,41 @@ namespace Crypto_currency_Analyze_Forecasting
 
         private void chooseAnotherCurrencyButton_Click(object sender, EventArgs e)
         {
-            
             chooseAnotherCurrencyButton.Visible = false;
             infoPrintLabel.Visible=false;
             textBoxShow.Visible = true;
-            currencyNameTextBox.Visible = true;
+            currencyNameTextBox.Visible = false;
             chooseCurrentCurrency.Visible = true;
             Title.Visible = true;
             explorerLinkLabel.Visible = false;
+            analyzeButton.Visible = false;
             chooseCurrentCurrency.SelectedIndexChanged -= chooseCurrentCurrency_SelectedIndexChanged;
             chooseCurrentCurrency.SelectedItem = null;
             chooseCurrentCurrency.SelectedIndexChanged += chooseCurrentCurrency_SelectedIndexChanged;
+            intervalComboBox.SelectedIndexChanged -= intervalComboBox_SelectedIndexChanged;
+            intervalComboBox.SelectedItem = null;
+            intervalComboBox.SelectedIndexChanged += intervalComboBox_SelectedIndexChanged;
+            intervalComboBox.Visible = true;
+            intervalLabel.Visible = true;
+            forecastingButton.Visible = false;
         }
 
         private void explorerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(currencyBlockchainExplorerUrl);
+        }
+
+        private void analyzeButton_Click(object sender, EventArgs e)
+        {
+            AnalyzeWindow analyzeWindow = new AnalyzeWindow();
+            analyzeWindow.SetCurrencyData(currencyDataList);
+            analyzeWindow.Show();
+        }
+
+        private void intervalComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboboxItem selectedItem = (ComboboxItem)intervalComboBox.SelectedItem;
+            selectedInterval = selectedItem.Value.ToString();
         }
     }
 }

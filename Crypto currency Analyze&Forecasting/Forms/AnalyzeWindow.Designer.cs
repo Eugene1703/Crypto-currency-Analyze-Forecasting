@@ -28,13 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
+            // 
+            // cartesianChart1
+            // 
+            this.cartesianChart1.Location = new System.Drawing.Point(12, 12);
+            this.cartesianChart1.Name = "cartesianChart1";
+            this.cartesianChart1.Size = new System.Drawing.Size(716, 280);
+            this.cartesianChart1.TabIndex = 0;
+            this.cartesianChart1.Text = "cartesianChart1";
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(310, 375);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(716, 266);
+            this.panel1.TabIndex = 1;
             // 
             // AnalyzeWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.cartesianChart1);
             this.Name = "AnalyzeWindow";
             this.Text = "AnalyzeWindow";
             this.Load += new System.EventHandler(this.AnalyzeWindow_Load);
@@ -43,5 +62,8 @@
         }
 
         #endregion
+
+        private LiveCharts.WinForms.CartesianChart cartesianChart1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

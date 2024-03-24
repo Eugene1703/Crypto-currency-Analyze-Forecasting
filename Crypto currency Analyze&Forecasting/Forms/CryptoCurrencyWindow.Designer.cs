@@ -35,13 +35,17 @@
             this.infoPrintLabel = new System.Windows.Forms.Label();
             this.chooseAnotherCurrencyButton = new System.Windows.Forms.Button();
             this.explorerLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.intervalLabel = new System.Windows.Forms.Label();
+            this.intervalComboBox = new System.Windows.Forms.ComboBox();
+            this.analyzeButton = new System.Windows.Forms.Button();
+            this.forecastingButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // chooseCurrentCurrency
             // 
             this.chooseCurrentCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.chooseCurrentCurrency.FormattingEnabled = true;
-            this.chooseCurrentCurrency.Location = new System.Drawing.Point(12, 60);
+            this.chooseCurrentCurrency.Location = new System.Drawing.Point(186, 60);
             this.chooseCurrentCurrency.Name = "chooseCurrentCurrency";
             this.chooseCurrentCurrency.Size = new System.Drawing.Size(121, 21);
             this.chooseCurrentCurrency.TabIndex = 0;
@@ -49,7 +53,7 @@
             // 
             // textBoxShow
             // 
-            this.textBoxShow.Location = new System.Drawing.Point(12, 120);
+            this.textBoxShow.Location = new System.Drawing.Point(186, 120);
             this.textBoxShow.Name = "textBoxShow";
             this.textBoxShow.Size = new System.Drawing.Size(121, 40);
             this.textBoxShow.TabIndex = 1;
@@ -60,7 +64,7 @@
             // Title
             // 
             this.Title.AutoSize = true;
-            this.Title.Location = new System.Drawing.Point(13, 13);
+            this.Title.Location = new System.Drawing.Point(183, 13);
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(154, 13);
             this.Title.TabIndex = 2;
@@ -68,7 +72,7 @@
             // 
             // currencyNameTextBox
             // 
-            this.currencyNameTextBox.Location = new System.Drawing.Point(12, 189);
+            this.currencyNameTextBox.Location = new System.Drawing.Point(186, 189);
             this.currencyNameTextBox.Name = "currencyNameTextBox";
             this.currencyNameTextBox.Size = new System.Drawing.Size(121, 20);
             this.currencyNameTextBox.TabIndex = 3;
@@ -76,7 +80,7 @@
             // infoPrintLabel
             // 
             this.infoPrintLabel.AutoSize = true;
-            this.infoPrintLabel.Location = new System.Drawing.Point(13, 13);
+            this.infoPrintLabel.Location = new System.Drawing.Point(21, 13);
             this.infoPrintLabel.Name = "infoPrintLabel";
             this.infoPrintLabel.Size = new System.Drawing.Size(0, 13);
             this.infoPrintLabel.TabIndex = 4;
@@ -85,26 +89,68 @@
             // 
             this.chooseAnotherCurrencyButton.Location = new System.Drawing.Point(631, 351);
             this.chooseAnotherCurrencyButton.Name = "chooseAnotherCurrencyButton";
-            this.chooseAnotherCurrencyButton.Size = new System.Drawing.Size(75, 52);
+            this.chooseAnotherCurrencyButton.Size = new System.Drawing.Size(112, 68);
             this.chooseAnotherCurrencyButton.TabIndex = 5;
-            this.chooseAnotherCurrencyButton.Text = "Choose Another Currency";
+            this.chooseAnotherCurrencyButton.Text = "Choose Another Currency or Interval";
             this.chooseAnotherCurrencyButton.UseVisualStyleBackColor = true;
             this.chooseAnotherCurrencyButton.Click += new System.EventHandler(this.chooseAnotherCurrencyButton_Click);
             // 
             // explorerLinkLabel
             // 
             this.explorerLinkLabel.AutoSize = true;
-            this.explorerLinkLabel.Location = new System.Drawing.Point(13, 173);
+            this.explorerLinkLabel.Location = new System.Drawing.Point(21, 172);
             this.explorerLinkLabel.Name = "explorerLinkLabel";
             this.explorerLinkLabel.Size = new System.Drawing.Size(0, 13);
             this.explorerLinkLabel.TabIndex = 6;
             this.explorerLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.explorerLinkLabel_LinkClicked);
+            // 
+            // intervalLabel
+            // 
+            this.intervalLabel.AutoSize = true;
+            this.intervalLabel.Location = new System.Drawing.Point(21, 13);
+            this.intervalLabel.Name = "intervalLabel";
+            this.intervalLabel.Size = new System.Drawing.Size(146, 13);
+            this.intervalLabel.TabIndex = 8;
+            this.intervalLabel.Text = "Select the data validity period";
+            // 
+            // intervalComboBox
+            // 
+            this.intervalComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.intervalComboBox.FormattingEnabled = true;
+            this.intervalComboBox.Location = new System.Drawing.Point(24, 60);
+            this.intervalComboBox.Name = "intervalComboBox";
+            this.intervalComboBox.Size = new System.Drawing.Size(121, 21);
+            this.intervalComboBox.TabIndex = 9;
+            this.intervalComboBox.SelectedIndexChanged += new System.EventHandler(this.intervalComboBox_SelectedIndexChanged);
+            // 
+            // analyzeButton
+            // 
+            this.analyzeButton.Location = new System.Drawing.Point(421, 351);
+            this.analyzeButton.Name = "analyzeButton";
+            this.analyzeButton.Size = new System.Drawing.Size(99, 68);
+            this.analyzeButton.TabIndex = 7;
+            this.analyzeButton.Text = "Analyze\r\n";
+            this.analyzeButton.UseVisualStyleBackColor = true;
+            this.analyzeButton.Click += new System.EventHandler(this.analyzeButton_Click);
+            // 
+            // forecastingButton
+            // 
+            this.forecastingButton.Location = new System.Drawing.Point(526, 351);
+            this.forecastingButton.Name = "forecastingButton";
+            this.forecastingButton.Size = new System.Drawing.Size(99, 68);
+            this.forecastingButton.TabIndex = 10;
+            this.forecastingButton.Text = "Forecasting";
+            this.forecastingButton.UseVisualStyleBackColor = true;
             // 
             // CryptoCurrencyWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.forecastingButton);
+            this.Controls.Add(this.intervalComboBox);
+            this.Controls.Add(this.intervalLabel);
+            this.Controls.Add(this.analyzeButton);
             this.Controls.Add(this.explorerLinkLabel);
             this.Controls.Add(this.chooseAnotherCurrencyButton);
             this.Controls.Add(this.infoPrintLabel);
@@ -129,5 +175,9 @@
         private System.Windows.Forms.Label infoPrintLabel;
         private System.Windows.Forms.Button chooseAnotherCurrencyButton;
         private System.Windows.Forms.LinkLabel explorerLinkLabel;
+        private System.Windows.Forms.Label intervalLabel;
+        private System.Windows.Forms.ComboBox intervalComboBox;
+        private System.Windows.Forms.Button analyzeButton;
+        private System.Windows.Forms.Button forecastingButton;
     }
 }
