@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.chooseCurrentCurrency = new System.Windows.Forms.ComboBox();
             this.textBoxShow = new System.Windows.Forms.Button();
             this.Title = new System.Windows.Forms.Label();
@@ -40,7 +41,8 @@
             this.analyzeButton = new System.Windows.Forms.Button();
             this.forecastingButton = new System.Windows.Forms.Button();
             this.minMaxChangeCurrency = new System.Windows.Forms.ListBox();
-            this.saveDataToDBButton = new System.Windows.Forms.Button();
+            this.getDataFromDatabaseButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // chooseCurrentCurrency
@@ -153,22 +155,28 @@
             this.minMaxChangeCurrency.Size = new System.Drawing.Size(407, 160);
             this.minMaxChangeCurrency.TabIndex = 11;
             // 
-            // saveDataToDBButton
+            // getDataFromDatabaseButton
             // 
-            this.saveDataToDBButton.Location = new System.Drawing.Point(631, 219);
-            this.saveDataToDBButton.Name = "saveDataToDBButton";
-            this.saveDataToDBButton.Size = new System.Drawing.Size(112, 68);
-            this.saveDataToDBButton.TabIndex = 12;
-            this.saveDataToDBButton.Text = "Save data to Database";
-            this.saveDataToDBButton.UseVisualStyleBackColor = true;
-            this.saveDataToDBButton.Click += new System.EventHandler(this.button1_Click);
+            this.getDataFromDatabaseButton.Location = new System.Drawing.Point(631, 215);
+            this.getDataFromDatabaseButton.Name = "getDataFromDatabaseButton";
+            this.getDataFromDatabaseButton.Size = new System.Drawing.Size(112, 68);
+            this.getDataFromDatabaseButton.TabIndex = 13;
+            this.getDataFromDatabaseButton.Text = "Get data from Database";
+            this.getDataFromDatabaseButton.UseVisualStyleBackColor = true;
+            this.getDataFromDatabaseButton.Click += new System.EventHandler(this.getDataFromDatabaseButton_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 60000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // CryptoCurrencyWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.saveDataToDBButton);
+            this.Controls.Add(this.getDataFromDatabaseButton);
             this.Controls.Add(this.minMaxChangeCurrency);
             this.Controls.Add(this.forecastingButton);
             this.Controls.Add(this.intervalComboBox);
@@ -203,6 +211,7 @@
         private System.Windows.Forms.Button analyzeButton;
         private System.Windows.Forms.Button forecastingButton;
         private System.Windows.Forms.ListBox minMaxChangeCurrency;
-        private System.Windows.Forms.Button saveDataToDBButton;
+        private System.Windows.Forms.Button getDataFromDatabaseButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }

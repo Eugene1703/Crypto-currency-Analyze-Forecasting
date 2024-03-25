@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ApiResponse.cs" />
+    <Compile Include="Classes\ArimaModel.cs" />
     <Compile Include="Classes\ComboboxItem.cs" />
     <Compile Include="Classes\CurrenciesApi.cs" />
     <Compile Include="Classes\Firebase.cs" />

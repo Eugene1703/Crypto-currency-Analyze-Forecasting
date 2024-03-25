@@ -1,10 +1,11 @@
 ﻿using Crypto_currency_Analyze_Forecasting.Classes;
 using Crypto_currency_Analyze_Forecasting.Forms;
+using FireSharp.Response;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Crypto_currency_Analyze_Forecasting
@@ -16,17 +17,22 @@ namespace Crypto_currency_Analyze_Forecasting
         private List<IntervalCurrencyData> currencyDataList;
         private string currencyBlockchainExplorerUrl;
         string selectedInterval;
+        Firebase firebase = new Firebase();
         public CryptoCurrencyWindow()
         {
             InitializeComponent();
             currenciesApi = new CurrenciesApi();
         }
-
-        private void CryptoCurrencyWindow_Load(object sender, EventArgs e)
+        private void InitializeComponents()
         {
             InitializeCurrencyComboBoxInfo();
             InitializeIntervalComboBoxInfo();
             InitializeMinMaxChangeCurrency();
+        }
+        private void CryptoCurrencyWindow_Load(object sender, EventArgs e)
+        {
+            currentValidCurrencyData = currenciesApi.GetValidCurrencyData();
+            InitializeComponents();
             currencyNameTextBox.Visible = false;
             chooseAnotherCurrencyButton.Visible = false;
             analyzeButton.Visible = false;
@@ -37,6 +43,7 @@ namespace Crypto_currency_Analyze_Forecasting
         }
         private void InitializeMinMaxChangeCurrency()
         {
+            minMaxChangeCurrency.Items.Clear();
             var currencyWithMaxVolume = currentValidCurrencyData.OrderByDescending(c => c.volumeUsd24Hr).FirstOrDefault();
             var currencyWithMinVolume = currentValidCurrencyData.OrderBy(c => c.volumeUsd24Hr).FirstOrDefault();
 
@@ -44,7 +51,7 @@ namespace Crypto_currency_Analyze_Forecasting
             var currencyWithMinChange = currentValidCurrencyData.OrderBy(c => c.changePercent24Hr).FirstOrDefault();
             minMaxChangeCurrency.Font = new Font("Arial", 16, FontStyle.Bold);
 
-            string[] items = 
+            string[] items =
                 {
                  $"The most sold currency {currencyWithMaxVolume.name} ({Math.Round(currencyWithMaxVolume.volumeUsd24Hr, 2).ToString("#,0")} $)",
                  $"The least sold currency {currencyWithMinVolume.name} ({Math.Round(currencyWithMinVolume.volumeUsd24Hr, 2).ToString("#,0")} $)",
@@ -64,8 +71,8 @@ namespace Crypto_currency_Analyze_Forecasting
                 minMaxChangeCurrency.Items.Add(item);
             }
         }
-       private void InitializeIntervalComboBoxInfo()
-       {
+        private void InitializeIntervalComboBoxInfo()
+        {
             Dictionary<string, string> periodValues = new Dictionary<string, string>
             {
                 {"Day", "m1"},
@@ -86,7 +93,7 @@ namespace Crypto_currency_Analyze_Forecasting
         {
             int width = 0;
 
-            currentValidCurrencyData = currenciesApi.GetValidCurrencyData();
+            
             currentValidCurrencyData.Sort((a, b) => string.Compare(a.name, b.name));
             foreach (var currency in currentValidCurrencyData)
             {
@@ -111,7 +118,7 @@ namespace Crypto_currency_Analyze_Forecasting
         }
         private void PrintInfo(ValidCurrencyData selectedCurrency)
         {
-            infoPrintLabel.Text= $"Name: {selectedCurrency.name}\n" +
+            infoPrintLabel.Text = $"Name: {selectedCurrency.name}\n" +
                                  $"ID: {selectedCurrency.id}\n" +
                                  $"Price USD: {selectedCurrency.priceUsd}\n" +
                                  $"Change Percent 24Hr: {selectedCurrency.changePercent24Hr}\n" +
@@ -124,23 +131,13 @@ namespace Crypto_currency_Analyze_Forecasting
         {
             try
             {
-                if (id!=null)
+                if (id != null)
                 {
                     ValidCurrencyData selectedCurrency = currentValidCurrencyData.FirstOrDefault(currency => currency.id == id);
                     if (selectedCurrency != null)
                     {
                         currencyDataList = currenciesApi.GetIntervalCurrencyData($"{selectedCurrency.id}", selectedInterval);
-                        infoPrintLabel.Visible = true;
-                        analyzeButton.Visible=true;
-                        textBoxShow.Visible = false;
-                        currencyNameTextBox.Visible = false;
-                        chooseCurrentCurrency.Visible = false;
-                        Title.Visible = false;
-                        intervalComboBox.Visible = false;
-                        intervalLabel.Visible = false;
-                        chooseAnotherCurrencyButton.Visible = true;
-                        forecastingButton.Visible = true;
-                        minMaxChangeCurrency.Visible = false;
+                        SetVisibleElementsOnCurrencySelection();
                         PrintInfo(selectedCurrency);
                     }
                     else throw new Exception("There is no currency with such a name");
@@ -168,11 +165,28 @@ namespace Crypto_currency_Analyze_Forecasting
                 CurrencyFromSelection(currencyNameTextBox.Text.ToLower());
             }
         }
-
+        private void SetVisibleElementsOnCurrencySelection()
+        {
+            infoPrintLabel.Visible = true;
+            analyzeButton.Visible = true;
+            textBoxShow.Visible = false;
+            currencyNameTextBox.Visible = false;
+            chooseCurrentCurrency.Visible = false;
+            Title.Visible = false;
+            intervalComboBox.Visible = false;
+            intervalLabel.Visible = false;
+            chooseAnotherCurrencyButton.Visible = true;
+            forecastingButton.Visible = true;
+            minMaxChangeCurrency.Visible = false;
+        }
         private void chooseAnotherCurrencyButton_Click(object sender, EventArgs e)
         {
+            HideElementsOnCurrencySelection();
+        }
+        private void HideElementsOnCurrencySelection()
+        {
             chooseAnotherCurrencyButton.Visible = false;
-            infoPrintLabel.Visible=false;
+            infoPrintLabel.Visible = false;
             textBoxShow.Visible = true;
             currencyNameTextBox.Visible = false;
             chooseCurrentCurrency.Visible = true;
@@ -190,7 +204,6 @@ namespace Crypto_currency_Analyze_Forecasting
             forecastingButton.Visible = false;
             minMaxChangeCurrency.Visible = true;
         }
-
         private void explorerLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(currencyBlockchainExplorerUrl);
@@ -214,18 +227,61 @@ namespace Crypto_currency_Analyze_Forecasting
             ForecastingWindow forecastingWindow = new ForecastingWindow(currencyDataList);
             forecastingWindow.Show();
         }
-        private string SanitizeCurrencyName(string name)
-        {
-            return Regex.Replace(name, @"[$#\[\]/\.]", "_");
-        }
         private void button1_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void getDataFromDatabaseButton_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            var response = firebase.client.Get("CurrencyData");
+            if (response != null)
+            {
+                var data = response.ResultAs<Dictionary<string, object>>();
+
+                if (data != null)
+                {
+                    var dates = data.Keys.ToList();
+                    var dateDialog = new Form
+                    {
+                        Text = "Choose DateTime",
+                        Size = new Size(400, 400)
+                    };
+                    var listBox = new ListBox
+                    {
+                        Font = new Font("Arial", 16, FontStyle.Bold),
+                        Dock = DockStyle.Fill
+                    };
+                    foreach (var date in dates)
+                    {
+                        listBox.Items.Add(date);
+                    }
+
+                    listBox.SelectedIndexChanged += (senderX, eX) =>
+                    {
+                        string selectedDate = (string)listBox.SelectedItem;
+                        FirebaseResponse selectedDataResponse = firebase.client.Get("CurrencyData/" + selectedDate);
+                        List<ValidCurrencyData> selectedData = selectedDataResponse.ResultAs<List<ValidCurrencyData>>();
+                        currentValidCurrencyData = selectedData;
+                        InitializeComponents();
+                        dateDialog.Hide();
+                    };
+                    dateDialog.Controls.Add(listBox);
+                    
+                    dateDialog.ShowDialog();
+                }
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            currentValidCurrencyData = currenciesApi.GetValidCurrencyData();
+            InitializeComponents();
             DateTime currentDate = DateTime.Now;
-            string formattedDate = currentDate.ToString("dd_MM_yyyy_HH_mm");
-            Firebase firebase = new Firebase();
-            string path = "CurrencyData" + formattedDate;
-            var dataToSave = currentValidCurrencyData.ToDictionary(currency => SanitizeCurrencyName(currency.name), currency => currency);
-            firebase.client.Set(path + "/", dataToSave);
+            string formattedDate = currentDate.ToString("dd_MM_yyyy_HH_mm_ss");
+            string path = "CurrencyData/" + formattedDate;
+            firebase.client.Set(path + "/", currentValidCurrencyData);
         }
     }
 }
