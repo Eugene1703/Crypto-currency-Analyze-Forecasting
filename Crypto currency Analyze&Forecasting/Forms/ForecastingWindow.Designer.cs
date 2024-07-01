@@ -32,6 +32,7 @@
             this.periodNumbersTextBox = new System.Windows.Forms.TextBox();
             this.makeForecastButton = new System.Windows.Forms.Button();
             this.forecastPrintLabel = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // periodNumbersLabel
@@ -68,11 +69,20 @@
             this.forecastPrintLabel.Size = new System.Drawing.Size(0, 13);
             this.forecastPrintLabel.TabIndex = 3;
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(12, 190);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(776, 251);
+            this.listBox1.TabIndex = 4;
+            // 
             // ForecastingWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.forecastPrintLabel);
             this.Controls.Add(this.makeForecastButton);
             this.Controls.Add(this.periodNumbersTextBox);
@@ -91,5 +101,6 @@
         private System.Windows.Forms.TextBox periodNumbersTextBox;
         private System.Windows.Forms.Button makeForecastButton;
         private System.Windows.Forms.Label forecastPrintLabel;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

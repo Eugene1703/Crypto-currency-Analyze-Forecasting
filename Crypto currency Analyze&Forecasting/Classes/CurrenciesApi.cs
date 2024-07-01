@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Crypto_currency_Analyze_Forecasting.Classes
 {
-    internal class CurrenciesApi
+    public class CurrenciesApi
     {
         private const string defaultApiUrl = "https://api.coincap.io/v2/assets/";
         private const string defaultApiIntervalRequest = "/history?interval=";
@@ -28,24 +28,23 @@ namespace Crypto_currency_Analyze_Forecasting.Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error " + ex.Message);
-                return null;
+                throw new Exception("Error " + ex.Message);
             }
         }
-        public List<IntervalCurrencyData> GetIntervalCurrencyData(string cryptoName, string interval)
+        public List<IntervalFromChosenToCurrentCurrencyData> GetIntervalCurrencyData(string cryptoName, string interval)
         {
             string url = $"{defaultApiUrl}{cryptoName}{defaultApiIntervalRequest}{interval}";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
             string response;
             response = GetResponseOnRequest(request);
-            return this.ParseResponse<IntervalCurrencyData>(response);
+            return this.ParseResponse<IntervalFromChosenToCurrentCurrencyData>(response);
         }
-        public List<ValidCurrencyData> GetValidCurrencyData()
+        public List<ActualCurrencyData> GetValidCurrencyData()
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(defaultApiUrl);
             request.Method = "GET";
-            return this.ParseResponse<ValidCurrencyData>(this.GetResponseOnRequest(request));
+            return this.ParseResponse<ActualCurrencyData>(this.GetResponseOnRequest(request));
         }
         public List<T> ParseResponse<T>(string response)
         {
@@ -63,7 +62,7 @@ namespace Crypto_currency_Analyze_Forecasting.Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error parsing response: " + ex.Message);
+                throw new Exception("Error " + ex.Message);
             }
             return null;
         }

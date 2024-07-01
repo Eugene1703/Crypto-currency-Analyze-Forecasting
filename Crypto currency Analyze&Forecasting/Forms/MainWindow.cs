@@ -15,13 +15,17 @@ namespace Crypto_currency_Analyze_Forecasting
         public MainWindow()
         {
             InitializeComponent();
+            ColorBind();
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            CryptoCurrencyWindow form2 = new CryptoCurrencyWindow();
-            form2.ShowDialog();
 
+
+        }
+        private void ColorBind()
+        {
+            this.BackColor = System.Drawing.Color.SeaGreen;
         }
     }
 }

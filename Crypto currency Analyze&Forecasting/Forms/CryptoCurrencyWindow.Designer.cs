@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CryptoCurrencyWindow));
             this.chooseCurrentCurrency = new System.Windows.Forms.ComboBox();
             this.textBoxShow = new System.Windows.Forms.Button();
             this.Title = new System.Windows.Forms.Label();
@@ -43,13 +44,18 @@
             this.minMaxChangeCurrency = new System.Windows.Forms.ListBox();
             this.getDataFromDatabaseButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // chooseCurrentCurrency
             // 
             this.chooseCurrentCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.chooseCurrentCurrency.FormattingEnabled = true;
-            this.chooseCurrentCurrency.Location = new System.Drawing.Point(186, 60);
+            this.chooseCurrentCurrency.Location = new System.Drawing.Point(186, 97);
             this.chooseCurrentCurrency.Name = "chooseCurrentCurrency";
             this.chooseCurrentCurrency.Size = new System.Drawing.Size(121, 21);
             this.chooseCurrentCurrency.TabIndex = 0;
@@ -57,7 +63,7 @@
             // 
             // textBoxShow
             // 
-            this.textBoxShow.Location = new System.Drawing.Point(186, 120);
+            this.textBoxShow.Location = new System.Drawing.Point(186, 157);
             this.textBoxShow.Name = "textBoxShow";
             this.textBoxShow.Size = new System.Drawing.Size(121, 40);
             this.textBoxShow.TabIndex = 1;
@@ -76,7 +82,7 @@
             // 
             // currencyNameTextBox
             // 
-            this.currencyNameTextBox.Location = new System.Drawing.Point(186, 189);
+            this.currencyNameTextBox.Location = new System.Drawing.Point(186, 226);
             this.currencyNameTextBox.Name = "currencyNameTextBox";
             this.currencyNameTextBox.Size = new System.Drawing.Size(121, 20);
             this.currencyNameTextBox.TabIndex = 3;
@@ -91,7 +97,7 @@
             // 
             // chooseAnotherCurrencyButton
             // 
-            this.chooseAnotherCurrencyButton.Location = new System.Drawing.Point(631, 351);
+            this.chooseAnotherCurrencyButton.Location = new System.Drawing.Point(631, 388);
             this.chooseAnotherCurrencyButton.Name = "chooseAnotherCurrencyButton";
             this.chooseAnotherCurrencyButton.Size = new System.Drawing.Size(112, 68);
             this.chooseAnotherCurrencyButton.TabIndex = 5;
@@ -102,7 +108,7 @@
             // explorerLinkLabel
             // 
             this.explorerLinkLabel.AutoSize = true;
-            this.explorerLinkLabel.Location = new System.Drawing.Point(21, 172);
+            this.explorerLinkLabel.Location = new System.Drawing.Point(21, 209);
             this.explorerLinkLabel.Name = "explorerLinkLabel";
             this.explorerLinkLabel.Size = new System.Drawing.Size(0, 13);
             this.explorerLinkLabel.TabIndex = 6;
@@ -121,7 +127,7 @@
             // 
             this.intervalComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.intervalComboBox.FormattingEnabled = true;
-            this.intervalComboBox.Location = new System.Drawing.Point(24, 60);
+            this.intervalComboBox.Location = new System.Drawing.Point(24, 97);
             this.intervalComboBox.Name = "intervalComboBox";
             this.intervalComboBox.Size = new System.Drawing.Size(121, 21);
             this.intervalComboBox.TabIndex = 9;
@@ -129,7 +135,7 @@
             // 
             // analyzeButton
             // 
-            this.analyzeButton.Location = new System.Drawing.Point(421, 351);
+            this.analyzeButton.Location = new System.Drawing.Point(421, 388);
             this.analyzeButton.Name = "analyzeButton";
             this.analyzeButton.Size = new System.Drawing.Size(99, 68);
             this.analyzeButton.TabIndex = 7;
@@ -139,7 +145,7 @@
             // 
             // forecastingButton
             // 
-            this.forecastingButton.Location = new System.Drawing.Point(526, 351);
+            this.forecastingButton.Location = new System.Drawing.Point(526, 388);
             this.forecastingButton.Name = "forecastingButton";
             this.forecastingButton.Size = new System.Drawing.Size(99, 68);
             this.forecastingButton.TabIndex = 10;
@@ -150,14 +156,14 @@
             // minMaxChangeCurrency
             // 
             this.minMaxChangeCurrency.FormattingEnabled = true;
-            this.minMaxChangeCurrency.Location = new System.Drawing.Point(381, 13);
+            this.minMaxChangeCurrency.Location = new System.Drawing.Point(381, 50);
             this.minMaxChangeCurrency.Name = "minMaxChangeCurrency";
             this.minMaxChangeCurrency.Size = new System.Drawing.Size(407, 160);
             this.minMaxChangeCurrency.TabIndex = 11;
             // 
             // getDataFromDatabaseButton
             // 
-            this.getDataFromDatabaseButton.Location = new System.Drawing.Point(631, 215);
+            this.getDataFromDatabaseButton.Location = new System.Drawing.Point(631, 252);
             this.getDataFromDatabaseButton.Name = "getDataFromDatabaseButton";
             this.getDataFromDatabaseButton.Size = new System.Drawing.Size(112, 68);
             this.getDataFromDatabaseButton.TabIndex = 13;
@@ -171,11 +177,44 @@
             this.timer1.Interval = 60000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(488, 252);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(123, 68);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Currency Top";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(900, 25);
+            this.toolStrip1.TabIndex = 15;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // CryptoCurrencyWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.SeaGreen;
+            this.ClientSize = new System.Drawing.Size(900, 579);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.getDataFromDatabaseButton);
             this.Controls.Add(this.minMaxChangeCurrency);
             this.Controls.Add(this.forecastingButton);
@@ -189,9 +228,12 @@
             this.Controls.Add(this.Title);
             this.Controls.Add(this.textBoxShow);
             this.Controls.Add(this.chooseCurrentCurrency);
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "CryptoCurrencyWindow";
             this.Text = "CryproCurrencyWindow";
             this.Load += new System.EventHandler(this.CryptoCurrencyWindow_Load);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,5 +255,9 @@
         private System.Windows.Forms.ListBox minMaxChangeCurrency;
         private System.Windows.Forms.Button getDataFromDatabaseButton;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }

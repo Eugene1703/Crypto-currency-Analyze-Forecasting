@@ -1,48 +1,40 @@
 ﻿using Crypto_currency_Analyze_Forecasting.Classes;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using LiveCharts.WinForms;
-using LiveCharts.Wpf.Charts.Base;
 using LiveCharts.Wpf;
 using LiveCharts;
-using System.Windows.Markup;
-using System.Xml.Linq;
-using LiveCharts.Definitions.Charts;
+using System.Windows.Media;
+using Color = System.Drawing.Color;
+using System.Drawing;
+using LiveCharts.Defaults;
 
 namespace Crypto_currency_Analyze_Forecasting.Forms
 {
-    public partial class AnalyzeWindow : Form
+    public partial class AnalyzeWindow : MainWindow
     {
-        public List<IntervalCurrencyData> currencyData;
+        public List<IntervalFromChosenToCurrentCurrencyData> currencyData;
+        List<string> dates1 = new List<string>();
+        
+        Color forecastColor;
         public AnalyzeWindow()
         {
             InitializeComponent();
         }
-        private void BuildChart()
+        public void BuildChart()
         {
-
-            var dates = new List<string>();
-            var prices = new ChartValues<double>();
-
+            ChartValues<DateTimePoint> prices = new ChartValues<DateTimePoint>();
             foreach (var item in currencyData)
             {
                 DateTime dateTime = DateTime.Parse(item.date);
-                string formattedDateTime = dateTime.ToString("HH:mm dd.MM.yyyy");
-                dates.Add(formattedDateTime);
-                prices.Add(Convert.ToDouble(item.priceUsd));
+                prices.Add(new DateTimePoint(dateTime, Convert.ToDouble(item.priceUsd)));
             }
 
+            cartesianChart1.AxisX.Clear(); // Очищаем ось X перед добавлением новых значений
             cartesianChart1.AxisX.Add(new Axis
             {
                 Title = "Date",
-                Labels = dates
+                LabelFormatter = value => new DateTime((long)value).ToString("dd.MM.yyyy HH:mm")
             });
 
             cartesianChart1.AxisY.Add(new Axis
@@ -50,27 +42,51 @@ namespace Crypto_currency_Analyze_Forecasting.Forms
                 Title = "Price (USD)"
             });
 
-            // Добавление серии данных на график
             cartesianChart1.Series.Add(new LineSeries
             {
-                Title = "Price (USD)",
-                Values = prices
+                Title = "Actual Data",
+                Values = prices,
+                Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(RandomColor().R, RandomColor().G, RandomColor().B))
             });
+        }
 
 
+        public Color RandomColor()
+        {
+            Random random = new Random();
+            return Color.FromArgb(random.Next(256), random.Next(256), 0);
+        }
+        public void AddDataToChart(List<IntervalFromChosenToCurrentCurrencyData> data)
+        {
+            ChartValues<DateTimePoint> prices = new ChartValues<DateTimePoint>();
+            foreach (var item in data)
+            {
+                DateTime dateTime = DateTime.Parse(item.date);
+                prices.Add(new DateTimePoint(dateTime, Convert.ToDouble(item.priceUsd)));
+            }
+
+            cartesianChart1.Series.Add(new LineSeries
+            {
+                Title = "Forecast Data",
+                Values = prices,
+                Stroke = new SolidColorBrush(System.Windows.Media.Color.FromRgb(RandomColor().R, RandomColor().G, RandomColor().B))
+            });
         }
 
         private void AnalyzeWindow_Load(object sender, EventArgs e)
         {
-            BuildChart();
-            panel1.Dock= DockStyle.Fill;
+            SetupChart();
+            forecastColor = RandomColor();
+        }
+        private void SetupChart()
+        {
+            panel1.Dock = DockStyle.Fill;
             panel1.Controls.Add(cartesianChart1);
             cartesianChart1.Dock = DockStyle.Fill;
         }
-        public void SetCurrencyData(List<IntervalCurrencyData> data)
+        public void SetCurrencyData(List<IntervalFromChosenToCurrentCurrencyData> data)
         {
             currencyData = data;
         }
-
     }
 }

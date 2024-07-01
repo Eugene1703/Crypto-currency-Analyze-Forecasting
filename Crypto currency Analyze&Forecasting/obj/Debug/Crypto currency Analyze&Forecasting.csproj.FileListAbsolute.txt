@@ -36,3 +36,18 @@ C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency
 C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\System.Net.Http.Primitives.xml
 C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto currency Analyze&Forecasting.csproj.App.config
 C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto_currency_Analyze_Forecasting.Forms.ForecastingWindow.resources
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Guna.Charts.WinForms.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Guna.Charts.WinForms.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\DynamicInterop.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\RDotNet.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\System.Security.AccessControl.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\DynamicInterop.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\RDotNet.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Extreme.Numerics.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\System.ValueTuple.dll
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\Extreme.Numerics.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\bin\Debug\System.ValueTuple.xml
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto_currency_Analyze_Forecasting.Forms.TopCurrenciesForm.resources
+C:\Users\Eugene\source\repos\Crypto currency Analyze&Forecasting\Crypto currency Analyze&Forecasting\obj\Debug\Crypto_currency_Analyze_Forecasting.Forms.InputDialog.resources
